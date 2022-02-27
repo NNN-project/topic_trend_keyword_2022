@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div id="container" style="width: 75%;">
+    <canvas id="myChart"></canvas>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        // 빈 차트를 생성한다.
+        var chart = new Chart(document.getElementById("myChart"), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                            {label: [], data: [],}
+                ],
+                borderWidth: 1
+            },
+        });
+
+        <!-- ajax를 이용하여 json 타입의 데이터를 수신 -->
+        <!-- 코드 생략 -->
+
+    });
+
+<!--    $.ajax({-->
+<!--        url: 'http://chank.iptime.org:8000/tkt/json_keyword_top10/',-->
+<!--        type: 'get',-->
+<!--        dataType: 'json',-->
+<!--        success: function (data) {-->
+<!--            chart = new Chart(document.getElementById("myChart"), {-->
+<!--                type: 'line',-->
+<!--                data: {-->
+<!--                    labels: data["labels"],-->
+<!--                    datasets: [-->
+<!--                        {-->
+<!--                            label: "weight",-->
+<!--                            data: data["data"],-->
+<!--                            borderColor: 'rgba(255, 0, 0, 0)',-->
+<!--                        }-->
+<!--                    ],-->
+<!--                    borderWidth: 1-->
+<!--                },-->
+<!--            });-->
+<!--        },-->
+<!--        error: function (xhr, status, error) {-->
+<!--            // 블라블라-->
+<!--        },-->
+<!--        complete: function (data) {-->
+<!--            // 블라블라-->
+<!--        }-->
+<!--    });-->
+
+    $.ajax({
+        url: 'http://chank.iptime.org:8000/tkt/json_keyword_top10/',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+
+            chart = new Chart(document.getElementById("myChart"), {
+                type: 'bar',
+                data: {
+                    labels: data["labels"],
+                    datasets: [
+                        {
+                            label: "weight",
+                            data: data["data"],
+                            borderColor: 'rgba(255, 0, 0, 0)',
+                        }
+                    ],
+                    borderWidth: 1
+                },
+            });
+        },
+        error: function (xhr, status, error) {
+            // 블라블라
+        },
+        complete: function (data) {
+            // 블라블라
+        }
+    });
+
+<!--    $.ajax({-->
+<!--        url: 'http://chank.iptime.org:8000/tkt/json_daily_chart/',-->
+<!--        type: 'get',-->
+<!--        dataType: 'json',-->
+<!--        success: function (data) {-->
+
+<!--            chart = new Chart(document.getElementById("myChart"), {-->
+<!--                type: 'bar',-->
+<!--                data: {-->
+<!--                    labels: data["data"][1],-->
+<!--                    datasets: [-->
+<!--                        {-->
+<!--                            label: "weight",-->
+<!--                            data: data["data"][2],-->
+<!--                            borderColor: 'rgba(255, 0, 0, 0)',-->
+<!--                        }-->
+<!--                    ],-->
+<!--                    borderWidth: 1-->
+<!--                },-->
+<!--            });-->
+<!--        },-->
+<!--        error: function (xhr, status, error) {-->
+<!--            // 블라블라-->
+<!--        },-->
+<!--        complete: function (data) {-->
+<!--            // 블라블라-->
+<!--        }-->
+<!--    });-->
+
+  </script>
+{% endblock %}
