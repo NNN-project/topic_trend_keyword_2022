@@ -11,7 +11,12 @@ from datetime import datetime, timedelta
 
 # 인덱스 페이지 실행 함수 ------->
 def index(request):
-    return render(request, 'tkt/index.html')
+    current_url = r'../'
+    context = {
+        'current_url': current_url
+
+    }
+    return render(request, 'tkt/index.html', context)
 
 
 def ajax_test(request):

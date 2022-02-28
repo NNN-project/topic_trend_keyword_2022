@@ -563,7 +563,7 @@
 <!-- Page specific script -->
 <script>
     $.ajax({
-        url: 'http://chank.iptime.org:8000/tkt/json_keyword_top10/',
+        url: '../tkt/json-keyword-top10/',
         dataType: "json",
         success: function (data) {
             var keyword_top10 = "";
@@ -590,7 +590,7 @@
     });
 
     $.ajax({
-        url: 'http://chank.iptime.org:8000/tkt/json_daily_chart/',
+        url: '../tkt/json-daily-chart/',
         dataType: "json",
         success: function (data) {
             var daily_top25 = "";
@@ -613,7 +613,7 @@
     });
 
     $.ajax({
-        url: 'http://chank.iptime.org:8000/tkt/json_keyword_top10/',
+        url: '../tkt/json-keyword-top10/',
         type: 'get',
         dataType: 'json',
         success: function (data) {
@@ -642,7 +642,7 @@
     });
 
     $.ajax({
-        url: 'http://chank.iptime.org:8000/tkt/json_twitter_data/',
+        url: '../tkt/json-twitter-data/',
         dataType: "json",
         success: function (data) {
             var twitter_tweet = "";
@@ -688,7 +688,7 @@
     });
 
         $.ajax({
-        url: 'http://chank.iptime.org:8000/tkt/json_youtube_data/',
+        url: 'http://chank.iptime.org:8000/tkt/json-youtube-data/',
         dataType: "json",
         success: function (data) {
             var youtube_contents = "";

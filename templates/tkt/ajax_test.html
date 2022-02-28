@@ -7,6 +7,7 @@
 </head>
 <body>
     반갑다능 ★
+    <div><a href="{% url 'chart-bar' %}">시작하기!</a></div>
     <input type="text" class="title" >
     <input type="text" class="content" >
     <input type="button" class="btnAjax" value="TEST">
@@ -31,7 +32,7 @@
           'content' : content,
         }
         $.ajax({
-            url : 'http://127.0.0.1:8000/tkt/a_test/',
+            url : 'http://127.0.0.1:8000/tkt/a-test/',
             type: 'POST',
             headers: {
                'X-CSRFTOKEN' : '{{ csrf_token }}'
