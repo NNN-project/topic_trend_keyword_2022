@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.db import connection
 from datetime import datetime, timedelta
 
+
 # Create your views here.
 
 
@@ -28,8 +29,7 @@ def a_test(request):
 
 
 def data_keyword_top10(request):
-    datetime.today() - timedelta(1)
-    today_datetime = datetime.today().strftime("%Y-%m-%d")
+    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
     # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
     global data_keyword_top10
     labels = []
@@ -37,12 +37,12 @@ def data_keyword_top10(request):
 
     try:
         cursor = connection.cursor()
-        #query = "SELECT keyword, weight FROM keyword WHERE c_date = '2022-02-26' ORDER BY weight DESC LIMIT 10;"
-        query = "SELECT keyword, weight FROM keyword WHERE c_date = %s ORDER BY weight DESC LIMIT 10;"%today_datetime
+        query = "SELECT keyword, weight FROM keyword WHERE c_date = '%s' ORDER BY weight DESC LIMIT 10;" % today_datetime
         cursor.execute(query)
         data_keyword_top10 = cursor.fetchall()
         connection.commit()
         connection.close()
+
     except:
         connection.rollback()
         print("Failed Selecting in StockList")
@@ -55,21 +55,21 @@ def data_keyword_top10(request):
         'labels': labels,
         'data': data,
         'time': today_datetime,
+        'query': query,
     }
 
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
 def data_twitter(request):
-    datetime.today()
-    today_datetime = datetime.today().strftime("%Y-%m-%d")
+    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
     # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
     labels = []
     data = []
 
     try:
         cursor = connection.cursor()
-        query_01 = "SELECT keyword FROM keyword WHERE c_date = '2022-02-26' ORDER BY weight DESC LIMIT 10;"
+        query_01 = "SELECT keyword FROM keyword WHERE c_date = '%s' ORDER BY weight DESC LIMIT 10;" % today_datetime
         query_02 = "SELECT keyword_id, CAST(SUM(like_count) AS SIGNED), COUNT(keyword_id) tweet, CAST(SUM(retweet) AS SIGNED), group_concat(DISTINCT(nullif(tags, 'empty'))) FROM twitter GROUP BY keyword_id ORDER BY keyword_id DESC;"
         cursor.execute(query_01)
         keywords = list(cursor.fetchall())
@@ -104,15 +104,14 @@ def data_twitter(request):
 
 
 def data_youtube(request):
-    datetime.today()
-    today_datetime = datetime.today().strftime("%Y-%m-%d")
+    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
     # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
     labels = []
     data = []
 
     try:
         cursor = connection.cursor()
-        query_01 = "SELECT keyword FROM keyword WHERE c_date = '2022-02-26' ORDER BY weight DESC LIMIT 10;"
+        query_01 = "SELECT keyword FROM keyword WHERE c_date = '%s' ORDER BY weight DESC LIMIT 10;" % today_datetime
         query_02 = "SELECT keyword_id, CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), CAST(SUM(view_count) AS SIGNED), group_concat(DISTINCT(nullif(tags, 'empty'))) FROM youtube GROUP BY keyword_id ORDER BY keyword_id DESC;"
         cursor.execute(query_01)
         keywords = list(cursor.fetchall())
@@ -148,10 +147,12 @@ def data_youtube(request):
 
 def data_daily_chart(request):
     # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
+    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
+    yesterday_datetime = (datetime.today() - timedelta(2)).strftime("%Y-%m-%d")
     try:
         cursor = connection.cursor()
-        query_01 = "SELECT keyword, weight FROM keyword WHERE c_date = '2022-02-26' ORDER BY weight DESC LIMIT 25;"
-        query_02 = "SELECT keyword, weight FROM keyword WHERE c_date = '2022-02-25' ORDER BY weight DESC LIMIT 25;"
+        query_01 = "SELECT keyword, weight FROM keyword WHERE c_date = '%s' ORDER BY weight DESC LIMIT 25;" % yesterday_datetime
+        query_02 = "SELECT keyword, weight FROM keyword WHERE c_date = '%s' ORDER BY weight DESC LIMIT 25;" % today_datetime
         cursor.execute(query_01)
         today = dict(cursor.fetchall())
         cursor.execute(query_02)
