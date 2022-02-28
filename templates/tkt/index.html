@@ -233,47 +233,7 @@
             </div>
             <!-- DataTales Example -->
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Twitter Tweet</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="twitter_tweet">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Twitter retweet</h3>
@@ -313,7 +273,7 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Twitter like</h3>
@@ -398,46 +358,6 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">YouTube Contents Uploads</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="youtube_contents">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
                             <h3 class="card-title">YouTube View</h3>
                         </div>
                         <!-- /.card-header -->
@@ -484,6 +404,46 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="youtube_like">
+                                <tr>
+                                    <td>1.</td>
+                                    <td>Keyword #01</td>
+                                    <td>0000</td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td>Keyword #02</td>
+                                    <td>0000</td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td>Keyword #03</td>
+                                    <td>0000</td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                    <td>Keyword #04</td>
+                                    <td>0000</td>
+                                </tr>
+                                <tr>
+                                    <td>5.</td>
+                                    <td>Keyword #05</td>
+                                    <td>0000</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">YouTube Comment</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <tbody id="youtube_comment">
                                 <tr>
                                     <td>1.</td>
                                     <td>Keyword #01</td>
@@ -594,12 +554,23 @@
         dataType: "json",
         success: function (data) {
             var daily_top25 = "";
+            var color = ['#e74c3c', '#3498db','#7f8c8d','#e67e22']; <!-- 상승, 하락, 동일, 뉴 -->
             for (var i = 0; i < data.data.length; i++) {
+                switch (data.data[i][2]){
+                    case 'up': status_color = color[0];
+                        break;
+                    case 'down': status_color = color[1];
+                        break;
+                    case 'same': status_color = color[2];
+                        break;
+                    case 'new': status_color = color[3];
+                        break;
+                }
                 daily_top25 += '<tr>'
                 daily_top25 += '<td>' + (i + 1) + '</td>'
                 daily_top25 += '<td>' + data.data[i][0] + '</td>'
                 daily_top25 += '<td>' + data.data[i][1] + '</td>'
-                daily_top25 += '<td>' + data.data[i][2] + '</td>'
+                daily_top25 += '<td style = "color:'+ status_color +'">' + data.data[i][2] + '</td>'
                 daily_top25 += '</tr>'
 
             }
@@ -651,12 +622,6 @@
             var twitter_tag = "";
 
             for (var i = 0; i < data.data.length - 5 ; i++) {
-                twitter_tweet += '<tr>'
-                twitter_tweet += '<td>' + data.labels[i] +'.' + '</td>'
-                twitter_tweet += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                twitter_tweet += '<td>' + data.data[i][2] + '</td>'
-                twitter_tweet += '</tr>'
-
                 twitter_retweet += '<tr>'
                 twitter_retweet += '<td>' + data.labels[i] +'.' + '</td>'
                 twitter_retweet += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
@@ -676,7 +641,6 @@
                 twitter_tag += '</tr>'
 
             }
-            $('[id="twitter_tweet"]').html(twitter_tweet);
             $('[id="twitter_retweet"]').html(twitter_retweet);
             $('[id="twitter_like"]').html(twitter_like);
             $('[id="twitter_tag"]').html(twitter_tag);
@@ -691,17 +655,17 @@
         url: 'http://chank.iptime.org:8000/tkt/json-youtube-data/',
         dataType: "json",
         success: function (data) {
-            var youtube_contents = "";
+            var youtube_comment = "";
             var youtube_view = "";
             var youtube_like = "";
             var youtube_tag = "";
 
             for (var i = 0; i < data.data.length - 5 ; i++) {
-                youtube_contents += '<tr>'
-                youtube_contents += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_contents += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                youtube_contents += '<td>' + data.data[i][2] + '</td>'
-                youtube_contents += '</tr>'
+                youtube_comment += '<tr>'
+                youtube_comment += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_comment += '<td>' + data.data[i][2] + '</td>'
+                youtube_comment += '</tr>'
 
                 youtube_view += '<tr>'
                 youtube_view += '<td>' + data.labels[i] +'.' + '</td>'
@@ -722,7 +686,7 @@
                 youtube_tag += '</tr>'
 
             }
-            $('[id="youtube_contents"]').html(youtube_contents);
+            $('[id="youtube_comment"]').html(youtube_comment);
             $('[id="youtube_view"]').html(youtube_view);
             $('[id="youtube_like"]').html(youtube_like);
             $('[id="youtube_tag"]').html(youtube_tag);
