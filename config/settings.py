@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'jnnf!&ti%ep1!r_#12gahk&=kb*+o#6u^h3-aq7z$s)t%2#0-2'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production!tkt
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.23', 'chank.iptime.org', '127.0.0.1', 'localhost']

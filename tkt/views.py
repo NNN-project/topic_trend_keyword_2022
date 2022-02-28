@@ -189,9 +189,46 @@ def data_daily_chart(request):
 
 
 def data_test_01(request):
+    weekly_day = ('월', '화', '수', '목', '금', '토', '일')
+    weekly_chart = {}
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+        keywords = cursor.fetchall()
+        if len(keywords) != 0:
+            for i in range(5):
+                cursor.execute(
+                    f"SELECT weight FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) AND keyword = '{keywords[i][0]}' ORDER BY c_date;")
+                daily_weight = list(cursor.fetchall())
+                weight = [0] * 7
+                for n in range(len(daily_weight)):
+                    weight[n] = daily_weight[0][0]
+                weekly_chart[keywords[i][0]] = weight
+        else:
+            # 이번주 데이터가 없을 시 지난주 데이터 추출
+            cursor.execute(
+                "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND DATE(c_date) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+            keywords = cursor.fetchall()
+            for i in range(5):
+                cursor.execute(
+                    f"SELECT weight FROM keyword WHERE DATE(c_date) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND DATE(c_date) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) AND keyword = '{keywords[i][0]}' ORDER BY c_date;")
+                daily_weight = list(cursor.fetchall())
+                weight = [0] * 7
+                for n in range(len(daily_weight)):
+                    weight[n] = daily_weight[0][0]
+                weekly_chart[keywords[i][0]] = weight
+        connection.commit()
+        connection.close()
+    except:
+        connection.rollback()
+        print("Failed Selecting in StockList")
+
+
+
 
     dic_data = {
-        'labels': ['월', '화', '수', '목', '금', '토', '일'],
+        'labels': weekly_day,
         'datasets': [{'label': 'keyword#01', 'backgroundColor': "#3e95cd", 'data': [4,5,6,7,8,9,4]},
                      {'label': 'keyword#02', 'backgroundColor': "#2ecc71", 'data': [1,2,3,4,5,6,1]},
                      {'label': 'keyword#03', 'backgroundColor': "#f1c40f", 'data': [4,3,3,2,3,1,1]},
