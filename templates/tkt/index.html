@@ -2,6 +2,7 @@
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 <main role="main">
     <div class="jumbo-tron" style="background-color: #ffffff; padding-top: 70px; padding-bottom: 50px;">
         <div class="container-fluid" style="color: #212931; width: 80%" >
@@ -25,9 +26,9 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
                 <h1 class="h3 mb-0 text-gray-800">Chart Sample</h1>
             </div>
-            <div class="card card-success">
+            <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Stacked Bar Chart</h3>
+                    <h3 class="card-title">Stacked Bar Chart #주간</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -41,12 +42,32 @@
                 <div class="card-body">
                     <div class="chart">
                         <!--                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>-->
-                        <canvas id="myChart"></canvas>
+                        <canvas id="stackedBarChart-wk"></canvas>
                     </div>
                 </div>
                 <!-- /.card-body -->
             </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Stacked Bar Chart #월간</h3>
 
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <!--                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>-->
+                        <canvas id="stackedBarChart-mt"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
@@ -242,31 +263,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="twitter_retweet">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -282,31 +278,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="twitter_like">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -322,31 +293,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped" >
                                 <tbody id="twitter_tag">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03, 해시태그 #04, 해시태그 #05</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td width="150px">Keyword #02</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03, 해시태그 #04, 해시태그 #05,  해시태그 #06</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>None</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:500px; ">해시태그 #01, 해시태그 #02, 해시태그 #03, 해시태그 #04, 해시태그 #05</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -364,31 +310,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="youtube_view">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -404,31 +325,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="youtube_like">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -444,31 +340,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="youtube_comment">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>0000</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -484,31 +355,6 @@
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tbody id="youtube_tag">
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Keyword #01</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03, 해시태그 #04, 해시태그 #05</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Keyword #02</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03, 해시태그 #04, 해시태그 #05,  해시태그 #06</td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Keyword #03</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03</td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Keyword #04</td>
-                                    <td>None</td>
-                                </tr>
-                                <tr>
-                                    <td>5.</td>
-                                    <td>Keyword #05</td>
-                                    <td>해시태그 #01, 해시태그 #02, 해시태그 #03, 해시태그 #04, 해시태그 #05</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -522,6 +368,7 @@
 
 <!-- Page specific script -->
 <script>
+    <!-- 키워드 top10 -->
     $.ajax({
         url: '../tkt/json-keyword-top10/',
         dataType: "json",
@@ -549,6 +396,7 @@
         }
     });
 
+    <!-- 데일리 키워드 변동 차트 -->
     $.ajax({
         url: '../tkt/json-daily-chart/',
         dataType: "json",
@@ -583,25 +431,29 @@
         }
     });
 
+    <!-- 주간 키워드 차트 -->
     $.ajax({
-        url: '../tkt/json-keyword-top10/',
+        url: '../tkt/json-stacked-wk-data/',
         type: 'get',
         dataType: 'json',
         success: function (data) {
-
-            chart = new Chart(document.getElementById("myChart"), {
+            console.log(data["labels"]);
+            chart = new Chart(document.getElementById("stackedBarChart-wk"), {
                 type: 'bar',
                 data: {
-                    labels: data["labels"],
-                    datasets: [
-                        {
-                            label: "weight",
-                            data: data["data"],
-                            borderColor: 'rgba(255, 0, 0, 0)',
-                        }
-                    ],
-                    borderWidth: 1
+                  labels: data.labels,
+                  datasets: data.datasets
                 },
+<!--                  options: {-->
+<!--                     scales: {-->
+<!--                        xAxes: [{-->
+<!--                            stacked: true-->
+<!--                        }],-->
+<!--                        yAxes: [{-->
+<!--                            stacked: true-->
+<!--                        }]-->
+<!--                    }-->
+<!--                  }-->
             });
         },
         error: function (xhr, status, error) {
@@ -612,6 +464,39 @@
         }
     });
 
+    $.ajax({
+        url: '../tkt/json-stacked-mt-data/',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data["labels"]);
+            chart = new Chart(document.getElementById("stackedBarChart-mt"), {
+                type: 'bar',
+                data: {
+                  labels: data.labels,
+                  datasets: data.datasets
+                },
+                  options: {
+                     scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                  }
+            });
+        },
+        error: function (xhr, status, error) {
+            // 블라블라
+        },
+        complete: function (data) {
+            // 블라블라
+        }
+    });
+
+    <!-- 트위터 테이블 -->
     $.ajax({
         url: '../tkt/json-twitter-data/',
         dataType: "json",
@@ -651,7 +536,8 @@
         }
     });
 
-        $.ajax({
+    <!-- 유튜브 테이블 -->
+    $.ajax({
         url: 'http://chank.iptime.org:8000/tkt/json-youtube-data/',
         dataType: "json",
         success: function (data) {

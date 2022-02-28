@@ -19,4 +19,6 @@ urlpatterns = [
     path('json-twitter-data/', views.data_twitter, name='json-twitter-data'),
     path('json-youtube-data/', views.data_youtube, name='json-youtube-data'),
 
+    path('json-stacked-wk-data/', views.data_test_01, name='json-stacked-wk-data'),
+    path('json-stacked-mt-data/', views.data_test_02, name='json-stacked-mt-data'),
 ]

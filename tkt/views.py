@@ -186,3 +186,31 @@ def data_daily_chart(request):
     }
 
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
+
+
+def data_test_01(request):
+
+    dic_data = {
+        'labels': ['월', '화', '수', '목', '금', '토', '일'],
+        'datasets': [{'label': 'keyword#01', 'backgroundColor': "#3e95cd", 'data': [4,5,6,7,8,9,4]},
+                     {'label': 'keyword#02', 'backgroundColor': "#2ecc71", 'data': [1,2,3,4,5,6,1]},
+                     {'label': 'keyword#03', 'backgroundColor': "#f1c40f", 'data': [4,3,3,2,3,1,1]},
+                     {'label': 'keyword#04', 'backgroundColor': "#9b59b6", 'data': [5,4,3,1,2,9,2]},
+                     {'label': 'keyword#05', 'backgroundColor': "#e74c3c", 'data': [2,5,1,1,3,3,6]},]
+    }
+    return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
+
+
+def data_test_02(request):
+
+    dic_data = {
+        'labels': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+                   '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+                   '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', ],
+        'datasets': [{'label': 'keyword#01', 'backgroundColor': "#3e95cd", 'data': [4,5,6,7,8,9,4,4,5,6,7,8,9,4,4,5,6,7,8,9,4,4,5,6,7,8,9,4]},
+                     {'label': 'keyword#02', 'backgroundColor': "#2ecc71", 'data': [1,2,3,4,5,6,1,1,2,3,4,5,6,1,1,2,3,4,5,6,1,1,2,3,4,5,6,1]},
+                     {'label': 'keyword#03', 'backgroundColor': "#f1c40f", 'data': [4,3,3,2,3,1,1,4,3,3,2,3,1,1,4,3,3,2,3,1,1,4,3,3,2,3,1,1]},
+                     {'label': 'keyword#04', 'backgroundColor': "#9b59b6", 'data': [5,4,3,1,2,9,2,5,4,3,1,2,9,2,5,4,3,1,2,9,2,5,4,3,1,2,9,2]},
+                     {'label': 'keyword#05', 'backgroundColor': "#e74c3c", 'data': [2,5,1,1,3,3,6,2,5,1,1,3,3,6,2,5,1,1,3,3,6,2,5,1,1,3,3,6]},]
+    }
+    return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
