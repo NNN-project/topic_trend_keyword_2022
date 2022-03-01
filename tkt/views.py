@@ -306,11 +306,6 @@ def twitter_mt_data(request):
 
 
 def youtube_dy_data(request):
-    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
-    # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
-    labels = []
-    data = []
-
     try:
         cursor = connection.cursor()
         cursor.execute("SELECT keyword FROM keyword WHERE c_date = date(now()) ORDER BY weight DESC LIMIT 5;")
@@ -334,18 +329,25 @@ def youtube_dy_data(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
-    result = []
+    daily_youtube = {}
     no = 1
     while len(keywords) > 0:
         word = keywords.pop(0)
-        for key in youtube:
-            if word[0] in key[0]:
-                result.append([no, list(key)])
+        for data in youtube:
+            if word[0] in data[0]:
+                daily_youtube[word[0]] = data[1:]
         no += 1
 
-    for entry in result:
-        labels.append(entry[0])
-        data.append(entry[1])
+    labels = []
+    data = []
+
+    for i in range(len(daily_youtube.keys())):
+        key = list(daily_youtube.keys())[i]
+        value = list(daily_youtube.values())[i]
+        value = list(value)
+        value.insert(0, key)
+        labels.append(i + 1)
+        data.append(value)
 
     dic_data = {
         'labels': labels,
@@ -356,26 +358,22 @@ def youtube_dy_data(request):
 
 
 def youtube_wk_data(request):
-    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
-    # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
-    labels = []
-    data = []
-
     try:
         cursor = connection.cursor()
-        cursor.execute("SELECT keyword FROM keyword WHERE c_date = date(now()) ORDER BY weight DESC LIMIT 5;")
+        cursor.execute(
+            "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) ORDER BY weight DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
             cursor.execute(
-                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) = curdate() GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
+                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND SUBSTR(keyword_id, 1, 8) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             youtube = cursor.fetchall()
         else:
-            # 오늘 정보 없을 시 어제 정보 출력
+            # 이번주 정보 없을 시 지난주 정보 출력
             cursor.execute(
-                "SELECT keyword FROM keyword WHERE c_date = date_add(curdate(), interval -1 day) ORDER BY weight DESC LIMIT 5;")
+                "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND DATE(c_date) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) ORDER BY weight DESC LIMIT 5;")
             keywords = list(cursor.fetchall())
             cursor.execute(
-                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) = date_add(curdate(), interval -1 day) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
+                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND SUBSTR(keyword_id, 1, 8) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             youtube = cursor.fetchall()
         connection.commit()
         connection.close()
@@ -384,18 +382,29 @@ def youtube_wk_data(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
-    result = []
+    weekly_youtube = {}
+    for i in keywords:
+        weekly_youtube[i[0]] = [0, 0, 0, '']
     no = 1
     while len(keywords) > 0:
         word = keywords.pop(0)
-        for key in youtube:
-            if word[0] in key[0]:
-                result.append([no, list(key)])
+        for data in youtube:
+            if word[0] in data[0]:
+                weekly_youtube[word[0]][0] += data[1]
+                weekly_youtube[word[0]][1] += data[2]
+                weekly_youtube[word[0]][2] += data[3]
+                weekly_youtube[word[0]][3] += data[4]
         no += 1
 
-    for entry in result:
-        labels.append(entry[0])
-        data.append(entry[1])
+    labels = []
+    data = []
+
+    for i in range(len(weekly_youtube.keys())):
+        key = list(weekly_youtube.keys())[i]
+        value = list(weekly_youtube.values())[i]
+        value.insert(0, key)
+        labels.append(i + 1)
+        data.append(value)
 
     dic_data = {
         'labels': labels,
@@ -406,26 +415,21 @@ def youtube_wk_data(request):
 
 
 def youtube_mt_data(request):
-    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
-    # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
-    labels = []
-    data = []
-
     try:
         cursor = connection.cursor()
-        cursor.execute("SELECT keyword FROM keyword WHERE c_date = date(now()) ORDER BY weight DESC LIMIT 5;")
+        cursor.execute(
+            "SELECT keyword FROM keyword WHERE DATE(c_date) >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND DATE(c_date) <= LAST_DAY(NOW()) ORDER BY weight DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
             cursor.execute(
-                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) = curdate() GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
+                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE published >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND published <= LAST_DAY(NOW()) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             youtube = cursor.fetchall()
         else:
-            # 오늘 정보 없을 시 어제 정보 출력
             cursor.execute(
-                "SELECT keyword FROM keyword WHERE c_date = date_add(curdate(), interval -1 day) ORDER BY weight DESC LIMIT 5;")
+                "SELECT keyword FROM keyword WHERE date_format(c_date, '%Y-%m') = date_format((curdate() - INTERVAL 1 MONTH), '%Y-%m') ORDER BY weight DESC LIMIT 5;")
             keywords = list(cursor.fetchall())
             cursor.execute(
-                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) = date_add(curdate(), interval -1 day) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
+                "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube  WHERE SUBSTR(keyword_id, 1, 8) = date_format((curdate() - INTERVAL 1 MONTH), '%Y-%m') GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             youtube = cursor.fetchall()
         connection.commit()
         connection.close()
@@ -434,18 +438,29 @@ def youtube_mt_data(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
-    result = []
+    monthly_youtube = {}
+    for i in keywords:
+        monthly_youtube[i[0]] = [0, 0, 0, '']
     no = 1
     while len(keywords) > 0:
         word = keywords.pop(0)
-        for key in youtube:
-            if word[0] in key[0]:
-                result.append([no, list(key)])
+        for data in youtube:
+            if word[0] in data[0]:
+                monthly_youtube[word[0]][0] += data[1]
+                monthly_youtube[word[0]][1] += data[2]
+                monthly_youtube[word[0]][2] += data[3]
+                monthly_youtube[word[0]][3] += data[4]
         no += 1
 
-    for entry in result:
-        labels.append(entry[0])
-        data.append(entry[1])
+    labels = []
+    data = []
+
+    for i in range(len(monthly_youtube.keys())):
+        key = list(monthly_youtube.keys())[i]
+        value = list(monthly_youtube.values())[i]
+        value.insert(0, key)
+        labels.append(i + 1)
+        data.append(value)
 
     dic_data = {
         'labels': labels,

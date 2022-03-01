@@ -961,25 +961,25 @@
             for (var i = 0; i < data.data.length; i++) {
                 youtube_comment += '<tr>'
                 youtube_comment += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_comment += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_comment += '<td>' + data.data[i][3] + '</td>'
                 youtube_comment += '</tr>'
 
                 youtube_view += '<tr>'
                 youtube_view += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_view += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_view += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_view += '<td>' + data.data[i][1] + '</td>'
                 youtube_view += '</tr>'
 
                 youtube_like += '<tr>'
                 youtube_like += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_like += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_like += '<td>' + data.data[i][2] + '</td>'
                 youtube_like += '</tr>'
 
                 youtube_tag += '<tr>'
                 youtube_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
-                youtube_tag += '<td width="150px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_tag += '<td width="150px">' + data.data[i][0] + '</td>'
                 youtube_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][4] + '</td>'
                 youtube_tag += '</tr>'
 
@@ -1006,26 +1006,26 @@
 
             for (var i = 0; i < data.data.length; i++) {
                 youtube_comment += '<tr>'
-                youtube_comment += '<td>' + data.labels[i].substr(9) +'.' + '</td>'
-                youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_comment += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_comment += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_comment += '<td>' + data.data[i][3] + '</td>'
                 youtube_comment += '</tr>'
 
                 youtube_view += '<tr>'
-                youtube_view += '<td>' + data.labels[i].substr(9) +'.' + '</td>'
-                youtube_view += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_view += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_view += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_view += '<td>' + data.data[i][1] + '</td>'
                 youtube_view += '</tr>'
 
                 youtube_like += '<tr>'
-                youtube_like += '<td>' + data.labels[i].substr(9) +'.' + '</td>'
-                youtube_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_like += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_like += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_like += '<td>' + data.data[i][2] + '</td>'
                 youtube_like += '</tr>'
 
                 youtube_tag += '<tr>'
                 youtube_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
-                youtube_tag += '<td width="150px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_tag += '<td width="150px">' + data.data[i][0] + '</td>'
                 youtube_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][4] + '</td>'
                 youtube_tag += '</tr>'
 
@@ -1040,7 +1040,7 @@
             console.log('실패');
         }
     });
-    <!-- 유튜브 테이블 일간-->
+    <!-- 유튜브 테이블 월간-->
     $.ajax({
         url: '../tkt/json-youtube-mt-data/',
         dataType: "json",
@@ -1053,25 +1053,25 @@
             for (var i = 0; i < data.data.length; i++) {
                 youtube_comment += '<tr>'
                 youtube_comment += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_comment += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_comment += '<td>' + data.data[i][3] + '</td>'
                 youtube_comment += '</tr>'
 
                 youtube_view += '<tr>'
                 youtube_view += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_view += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_view += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_view += '<td>' + data.data[i][1] + '</td>'
                 youtube_view += '</tr>'
 
                 youtube_like += '<tr>'
                 youtube_like += '<td>' + data.labels[i] +'.' + '</td>'
-                youtube_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_like += '<td width="350px">' + data.data[i][0] + '</td>'
                 youtube_like += '<td>' + data.data[i][2] + '</td>'
                 youtube_like += '</tr>'
 
                 youtube_tag += '<tr>'
                 youtube_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
-                youtube_tag += '<td width="150px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_tag += '<td width="150px">' + data.data[i][0] + '</td>'
                 youtube_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][4] + '</td>'
                 youtube_tag += '</tr>'
 
