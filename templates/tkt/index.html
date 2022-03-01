@@ -12,353 +12,631 @@
             <hr class="hr" style="padding-top: 10px;">
         </div>
         <div class="container-fluid" style="width: 80%;">
+            <!-- Topic Keyword Top10 Card -->
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
                 <h1 class="h3 mb-0 text-gray-800">Topic Keyword Top 10</h1>
             </div>
-            <!-- Topic Keyword Top10 Card -->
-            <div class="row" id="top10">
-            </div>
-            <hr class="hr" style="padding-top: 10px;">
-
-
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
-                <h1 class="h3 mb-0 text-gray-800">Chart Sample</h1>
-            </div>
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Stacked Bar Chart #주간</h3>
-
+            <div>
+                <div class="card-header" style="border-bottom: 0px; padding-right: 0px;">
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#top10_day" data-toggle="tab">Daily</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#top10_week" data-toggle="tab">Weekly</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#top10_month" data-toggle="tab">Monthly</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <!--                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>-->
-                        <canvas id="stackedBarChart-wk"></canvas>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Stacked Bar Chart #월간</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <!--                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>-->
-                        <canvas id="stackedBarChart-mt"></canvas>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
-                <h1 class="h3 mb-0 text-gray-800">Daily Topic Keyword List</h1>
-            </div>
-            <!-- DataTales Example -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0" style="height: 500px;">
-                            <table class="table table-head-fixed text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Keyword</th>
-                                    <th>Count</th>
-                                    <th>Status</th>
-                                </tr>
-                                </thead>
-                                <tbody id="daily_top25">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Keyword #01</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Keyword #02</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Keyword #03</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Keyword #04</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Keyword #05</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Keyword #06</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Keyword #07</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Keyword #08</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Keyword #09</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Keyword #10</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Keyword #11</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>Keyword #12</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>Keyword #13</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td>Keyword #14</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    <td>Keyword #15</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>Keyword #16</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>17</td>
-                                    <td>Keyword #17</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>18</td>
-                                    <td>Keyword #18</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    <td>Keyword #19</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td>Keyword #20</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>21</td>
-                                    <td>Keyword #21</td>
-                                    <td>789</td>
-                                    <td><small class="text-success mr-1"><i class="fas fa-arrow-up"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>22</td>
-                                    <td>Keyword #22</td>
-                                    <td>789</td>
-                                    <td><small class="text-warning mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>23</td>
-                                    <td>Keyword #23</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    <td>Keyword #24</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                <tr>
-                                    <td>25</td>
-                                    <td>Keyword #25</td>
-                                    <td>789</td>
-                                    <td><small class="text-danger mr-1"><i class="fas fa-arrow-down"></i></small></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                <div style="margin-top: 0.5rem;">
+                    <div class="tab-content p-0">
+                        <div class="chart tab-pane active" id="top10_day" style="position: relative;">
+                            <div class="row" id="keyword_top10_day"></div>
                         </div>
-                        <!-- /.card-body -->
+                        <div class="chart tab-pane" id="top10_week" style="position: relative;">
+                            <div class="row" id="keyword_top10_week"></div>
+                        </div>
+                        <div class="chart tab-pane" id="top10_month" style="position: relative;">
+                            <div class="row" id="keyword_top10_month"></div>
+                        </div>
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
             <hr class="hr" style="padding-top: 10px;">
+            <!-- Topic Keyword Top10 Card end -->
+
+            <!-- Topic Keyword Weight Analytics -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
+                <h1 class="h3 mb-0 text-gray-800">Topic Keyword Weight Analytics</h1>
+            </div>
+            <div>
+                <div class="card-header" style="border-bottom: 0px; padding-right: 0px;">
+                    <div class="card-tools">
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#Weight_day" data-toggle="tab">Daily</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Weight_week" data-toggle="tab">Weekly</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Weight_month" data-toggle="tab">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 0.5rem;">
+                    <div class="tab-content p-0">
+                        <div class="card tab-pane active" id="Weight_day" style="position: relative;">
+                            <div class="card-header">
+                                <h3 class="card-title">Daily Topic Keyword Chart</h3>
+                            </div>
+                            <div class="card-body table-responsive p-0" style="height: 500px;">
+                                <table class="table table-head-fixed text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Keyword</th>
+                                        <th>Count</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="daily_top25">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card tab-pane" id="Weight_week" style="position: relative;">
+                            <div class="card-header">
+                                <h3 class="card-title">Weekly Bar Chart</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <canvas id="stackedBarChart-wk"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card tab-pane" id="Weight_month" style="position: relative;">
+                            <div class="card-header">
+                                <h3 class="card-title">Monthly Stacked Bar Chart</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <canvas id="stackedBarChart-mt"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="hr" style="padding-top: 10px;">
+            <!-- Topic Keyword Weight Analytics end-->
+
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2.5rem;">
                 <h1 class="h3 mb-0 text-gray-800">Trending Topic Keywords on Social Media</h1>
             </div>
             <!-- DataTales Example -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Twitter retweet</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="twitter_retweet">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
+            <div>
+                <div class="card-header" style="border-bottom: 0px; padding-right: 0px;">
+                    <div class="card-tools">
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#Social_day" data-toggle="tab">Daily</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Social_week" data-toggle="tab">Weekly</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Social_month" data-toggle="tab">Monthly</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Twitter like</h3>
+                <div style="margin-top: 0.5rem;">
+                    <div class="tab-content p-0">
+                        <div class="tab-pane active" id="Social_day" style="position: relative;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter retweet</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="twitter_retweet_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter like</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="twitter_like_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter Hashtag on Keyword</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped" >
+                                                <tbody id="twitter_tag_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 1rem;">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube View</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_view_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube like</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_like_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube Comment</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_comment_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube Hashtag on Keyword</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_tag_dy">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="twitter_like">
-                                </tbody>
-                            </table>
+                        <div class="card tab-pane" id="Social_week" style="position: relative;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter retweet</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="twitter_retweet_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter like</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="twitter_like_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter Hashtag on Keyword</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped" >
+                                                <tbody id="twitter_tag_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 1rem;">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube View</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_view_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube like</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_like_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube Comment</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_comment_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube Hashtag on Keyword</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_tag_wk">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Twitter Hashtag on Keyword</h3>
+                        <div class="card tab-pane" id="Social_month" style="position: relative;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter retweet</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="twitter_retweet_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter like</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="twitter_like_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Twitter Hashtag on Keyword</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped" >
+                                                <tbody id="twitter_tag_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 1rem;">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube View</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_view_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube like</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_like_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube Comment</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_comment_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">YouTube Hashtag on Keyword</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus" ></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <tbody id="youtube_tag_mt">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped" >
-                                <tbody id="twitter_tag">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 1rem;">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">YouTube View</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="youtube_view">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">YouTube like</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="youtube_like">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">YouTube Comment</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="youtube_comment">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">YouTube Hashtag on Keyword</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tbody id="youtube_tag">
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
@@ -368,9 +646,9 @@
 
 <!-- Page specific script -->
 <script>
-    <!-- 키워드 top10 -->
+    <!-- 키워드 top10 #일간 -->
     $.ajax({
-        url: '../tkt/json-keyword-top10/',
+        url: '../tkt/json-keyword-top10-day/',
         dataType: "json",
         success: function (data) {
             var keyword_top10 = "";
@@ -387,7 +665,7 @@
                 keyword_top10 += '<div class="h4 mb-0 font-weight-bold text-gray-800">' + data.data[i] + '<span class="h6 mb-0">회 언급</span></div>'
                 keyword_top10 += '</div></div></div></div></div>'
             }
-            $('[id="top10"]').html(keyword_top10);
+            $('[id="keyword_top10_day"]').html(keyword_top10);
             console.log(data.labels[0]);
 
         },
@@ -396,6 +674,61 @@
         }
     });
 
+    <!-- 키워드 top10 #주간 -->
+    $.ajax({
+        url: '../tkt/json-keyword-top10-week/',
+        dataType: "json",
+        success: function (data) {
+            var keyword_top10 = "";
+            var color = ['primary', 'success','info','warning', 'Danger'];
+            var pick_color = "";
+            for (var i = 0; i < data.data.length; i++) {
+                if (i < 5) {
+                    pick_color = color[i]
+                }else{
+                    pick_color = color[i-5]
+                }
+                keyword_top10 += '<div class="col-xl-3 col-md-6 mb-4"><div class="card border-left-' + pick_color +' shadow h-100 py-1"><div class="card-body"><div class="row no-gutters align-items-center"><div class="col mr-2">'
+                keyword_top10 += '<div class="text-s font-weight-bold text-' + pick_color + ' text-uppercase mb-1">' + data.labels[i] + '</div>'
+                keyword_top10 += '<div class="h4 mb-0 font-weight-bold text-gray-800">' + data.data[i] + '<span class="h6 mb-0">회 언급</span></div>'
+                keyword_top10 += '</div></div></div></div></div>'
+            }
+            $('[id="keyword_top10_week"]').html(keyword_top10);
+            console.log(data.labels[0]);
+
+        },
+        error: function (request, status, error) {
+            console.log('실패');
+        }
+    });
+
+    <!-- 키워드 top10 #월간 -->
+    $.ajax({
+        url: '../tkt/json-keyword-top10-month/',
+        dataType: "json",
+        success: function (data) {
+            var keyword_top10 = "";
+            var color = ['primary', 'success','info','warning', 'Danger'];
+            var pick_color = "";
+            for (var i = 0; i < data.data.length; i++) {
+                if (i < 5) {
+                    pick_color = color[i]
+                }else{
+                    pick_color = color[i-5]
+                }
+                keyword_top10 += '<div class="col-xl-3 col-md-6 mb-4"><div class="card border-left-' + pick_color +' shadow h-100 py-1"><div class="card-body"><div class="row no-gutters align-items-center"><div class="col mr-2">'
+                keyword_top10 += '<div class="text-s font-weight-bold text-' + pick_color + ' text-uppercase mb-1">' + data.labels[i] + '</div>'
+                keyword_top10 += '<div class="h4 mb-0 font-weight-bold text-gray-800">' + data.data[i] + '<span class="h6 mb-0">회 언급</span></div>'
+                keyword_top10 += '</div></div></div></div></div>'
+            }
+            $('[id="keyword_top10_month"]').html(keyword_top10);
+            console.log(data.labels[0]);
+
+        },
+        error: function (request, status, error) {
+            console.log('실패');
+        }
+    });
     <!-- 데일리 키워드 변동 차트 -->
     $.ajax({
         url: '../tkt/json-daily-chart/',
@@ -497,38 +830,116 @@
     });
 
     <!-- 트위터 테이블 -->
+    <!-- 트위터 테이블 일간 -->
     $.ajax({
-        url: '../tkt/json-twitter-data/',
+        url: '../tkt/json-twitter-dy-data/',
         dataType: "json",
         success: function (data) {
-            var twitter_tweet = "";
             var twitter_retweet = "";
             var twitter_like = "";
             var twitter_tag = "";
 
-            for (var i = 0; i < data.data.length - 5 ; i++) {
+            for (var i = 0; i < data.data.length; i++) {
                 twitter_retweet += '<tr>'
                 twitter_retweet += '<td>' + data.labels[i] +'.' + '</td>'
-                twitter_retweet += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                twitter_retweet += '<td>' + data.data[i][3] + '</td>'
+                twitter_retweet += '<td width="350px">' + data.data[i][0] + '</td>'
+                twitter_retweet += '<td>' + data.data[i][1] + '</td>'
                 twitter_retweet += '</tr>'
 
                 twitter_like += '<tr>'
                 twitter_like += '<td>' + data.labels[i] +'.' + '</td>'
-                twitter_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                twitter_like += '<td>' + data.data[i][1] + '</td>'
+                twitter_like += '<td width="350px">' + data.data[i][0] + '</td>'
+                twitter_like += '<td>' + data.data[i][2] + '</td>'
                 twitter_like += '</tr>'
 
                 twitter_tag += '<tr>'
                 twitter_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
-                twitter_tag += '<td width="150px">' + data.data[i][0].substr(9) + '</td>'
-                twitter_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][4] + '</td>'
+                twitter_tag += '<td width="150px">' + data.data[i][0] + '</td>'
+                twitter_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][3] + '</td>'
                 twitter_tag += '</tr>'
 
             }
-            $('[id="twitter_retweet"]').html(twitter_retweet);
-            $('[id="twitter_like"]').html(twitter_like);
-            $('[id="twitter_tag"]').html(twitter_tag);
+            $('[id="twitter_retweet_dy"]').html(twitter_retweet);
+            $('[id="twitter_like_dy"]').html(twitter_like);
+            $('[id="twitter_tag_dy"]').html(twitter_tag);
+
+        },
+        error: function (request, status, error) {
+            console.log('실패');
+        }
+    });
+
+    <!-- 트위터 테이블 주간 -->
+    $.ajax({
+        url: '../tkt/json-twitter-wk-data/',
+        dataType: "json",
+        success: function (data) {
+            var twitter_retweet = "";
+            var twitter_like = "";
+            var twitter_tag = "";
+
+            for (var i = 0; i < data.data.length; i++) {
+                twitter_retweet += '<tr>'
+                twitter_retweet += '<td>' + data.labels[i] +'.' + '</td>'
+                twitter_retweet += '<td width="350px">' + data.data[i][0] + '</td>'
+                twitter_retweet += '<td>' + data.data[i][1] + '</td>'
+                twitter_retweet += '</tr>'
+
+                twitter_like += '<tr>'
+                twitter_like += '<td>' + data.labels[i] +'.' + '</td>'
+                twitter_like += '<td width="350px">' + data.data[i][0] + '</td>'
+                twitter_like += '<td>' + data.data[i][2] + '</td>'
+                twitter_like += '</tr>'
+
+                twitter_tag += '<tr>'
+                twitter_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
+                twitter_tag += '<td width="150px">' + data.data[i][0] + '</td>'
+                twitter_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][3] + '</td>'
+                twitter_tag += '</tr>'
+
+            }
+            $('[id="twitter_retweet_wk"]').html(twitter_retweet);
+            $('[id="twitter_like_wk"]').html(twitter_like);
+            $('[id="twitter_tag_wk"]').html(twitter_tag);
+
+        },
+        error: function (request, status, error) {
+            console.log('실패');
+        }
+    });
+
+    <!-- 트위터 테이블 월간 -->
+    $.ajax({
+        url: '../tkt/json-twitter-mt-data/',
+        dataType: "json",
+        success: function (data) {
+            var twitter_retweet = "";
+            var twitter_like = "";
+            var twitter_tag = "";
+
+            for (var i = 0; i < data.data.length; i++) {
+                twitter_retweet += '<tr>'
+                twitter_retweet += '<td>' + data.labels[i] +'.' + '</td>'
+                twitter_retweet += '<td width="350px">' + data.data[i][0] + '</td>'
+                twitter_retweet += '<td>' + data.data[i][1] + '</td>'
+                twitter_retweet += '</tr>'
+
+                twitter_like += '<tr>'
+                twitter_like += '<td>' + data.labels[i] +'.' + '</td>'
+                twitter_like += '<td width="350px">' + data.data[i][0] + '</td>'
+                twitter_like += '<td>' + data.data[i][2] + '</td>'
+                twitter_like += '</tr>'
+
+                twitter_tag += '<tr>'
+                twitter_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
+                twitter_tag += '<td width="150px">' + data.data[i][0] + '</td>'
+                twitter_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][3] + '</td>'
+                twitter_tag += '</tr>'
+
+            }
+            $('[id="twitter_retweet_mt"]').html(twitter_retweet);
+            $('[id="twitter_like_mt"]').html(twitter_like);
+            $('[id="twitter_tag_mt"]').html(twitter_tag);
 
         },
         error: function (request, status, error) {
@@ -537,8 +948,9 @@
     });
 
     <!-- 유튜브 테이블 -->
+    <!-- 유튜브 테이블 일간-->
     $.ajax({
-        url: '../tkt/json-youtube-data/',
+        url: '../tkt/json-youtube-dy-data/',
         dataType: "json",
         success: function (data) {
             var youtube_comment = "";
@@ -546,23 +958,23 @@
             var youtube_like = "";
             var youtube_tag = "";
 
-            for (var i = 0; i < data.data.length - 5 ; i++) {
+            for (var i = 0; i < data.data.length; i++) {
                 youtube_comment += '<tr>'
                 youtube_comment += '<td>' + data.labels[i] +'.' + '</td>'
                 youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                youtube_comment += '<td>' + data.data[i][2] + '</td>'
+                youtube_comment += '<td>' + data.data[i][3] + '</td>'
                 youtube_comment += '</tr>'
 
                 youtube_view += '<tr>'
                 youtube_view += '<td>' + data.labels[i] +'.' + '</td>'
                 youtube_view += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                youtube_view += '<td>' + data.data[i][3] + '</td>'
+                youtube_view += '<td>' + data.data[i][1] + '</td>'
                 youtube_view += '</tr>'
 
                 youtube_like += '<tr>'
                 youtube_like += '<td>' + data.labels[i] +'.' + '</td>'
                 youtube_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
-                youtube_like += '<td>' + data.data[i][1] + '</td>'
+                youtube_like += '<td>' + data.data[i][2] + '</td>'
                 youtube_like += '</tr>'
 
                 youtube_tag += '<tr>'
@@ -572,17 +984,108 @@
                 youtube_tag += '</tr>'
 
             }
-            $('[id="youtube_comment"]').html(youtube_comment);
-            $('[id="youtube_view"]').html(youtube_view);
-            $('[id="youtube_like"]').html(youtube_like);
-            $('[id="youtube_tag"]').html(youtube_tag);
+            $('[id="youtube_comment_dy"]').html(youtube_comment);
+            $('[id="youtube_view_dy"]').html(youtube_view);
+            $('[id="youtube_like_dy"]').html(youtube_like);
+            $('[id="youtube_tag_dy"]').html(youtube_tag);
 
         },
         error: function (request, status, error) {
             console.log('실패');
         }
     });
+    <!-- 유튜브 테이블 주간-->
+    $.ajax({
+        url: '../tkt/json-youtube-wk-data/',
+        dataType: "json",
+        success: function (data) {
+            var youtube_comment = "";
+            var youtube_view = "";
+            var youtube_like = "";
+            var youtube_tag = "";
 
+            for (var i = 0; i < data.data.length; i++) {
+                youtube_comment += '<tr>'
+                youtube_comment += '<td>' + data.labels[i].substr(9) +'.' + '</td>'
+                youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_comment += '<td>' + data.data[i][3] + '</td>'
+                youtube_comment += '</tr>'
+
+                youtube_view += '<tr>'
+                youtube_view += '<td>' + data.labels[i].substr(9) +'.' + '</td>'
+                youtube_view += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_view += '<td>' + data.data[i][1] + '</td>'
+                youtube_view += '</tr>'
+
+                youtube_like += '<tr>'
+                youtube_like += '<td>' + data.labels[i].substr(9) +'.' + '</td>'
+                youtube_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_like += '<td>' + data.data[i][2] + '</td>'
+                youtube_like += '</tr>'
+
+                youtube_tag += '<tr>'
+                youtube_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
+                youtube_tag += '<td width="150px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][4] + '</td>'
+                youtube_tag += '</tr>'
+
+            }
+            $('[id="youtube_comment_wk"]').html(youtube_comment);
+            $('[id="youtube_view_wk"]').html(youtube_view);
+            $('[id="youtube_like_wk"]').html(youtube_like);
+            $('[id="youtube_tag_wk"]').html(youtube_tag);
+
+        },
+        error: function (request, status, error) {
+            console.log('실패');
+        }
+    });
+    <!-- 유튜브 테이블 일간-->
+    $.ajax({
+        url: '../tkt/json-youtube-mt-data/',
+        dataType: "json",
+        success: function (data) {
+            var youtube_comment = "";
+            var youtube_view = "";
+            var youtube_like = "";
+            var youtube_tag = "";
+
+            for (var i = 0; i < data.data.length; i++) {
+                youtube_comment += '<tr>'
+                youtube_comment += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_comment += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_comment += '<td>' + data.data[i][3] + '</td>'
+                youtube_comment += '</tr>'
+
+                youtube_view += '<tr>'
+                youtube_view += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_view += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_view += '<td>' + data.data[i][1] + '</td>'
+                youtube_view += '</tr>'
+
+                youtube_like += '<tr>'
+                youtube_like += '<td>' + data.labels[i] +'.' + '</td>'
+                youtube_like += '<td width="350px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_like += '<td>' + data.data[i][2] + '</td>'
+                youtube_like += '</tr>'
+
+                youtube_tag += '<tr>'
+                youtube_tag += '<td width="60px">' + data.labels[i] +'.' + '</td>'
+                youtube_tag += '<td width="150px">' + data.data[i][0].substr(9) + '</td>'
+                youtube_tag += '<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100px; ">' + data.data[i][4] + '</td>'
+                youtube_tag += '</tr>'
+
+            }
+            $('[id="youtube_comment_mt"]').html(youtube_comment);
+            $('[id="youtube_view_mt"]').html(youtube_view);
+            $('[id="youtube_like_mt"]').html(youtube_like);
+            $('[id="youtube_tag_mt"]').html(youtube_tag);
+
+        },
+        error: function (request, status, error) {
+            console.log('실패');
+        }
+    });
 </script>
 
 {% endblock %}

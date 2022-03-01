@@ -19,7 +19,7 @@
     </div>
     <div class="card-body">
         <div class="chart">
-            <canvas id="bar-chart3" ></canvas>
+            <canvas id="bar-chart_3" ></canvas>
         </div>
     </div>
     <!-- /.card-body -->
@@ -39,7 +39,7 @@
     </div>
     <div class="card-body">
         <div class="chart">
-            <canvas id="bar-chart" ></canvas>
+            <canvas id="bar-chart_" ></canvas>
         </div>
     </div>
     <!-- /.card-body -->
@@ -59,12 +59,49 @@
     </div>
     <div class="card-body">
         <div class="chart">
-            <canvas id="bar-chart2" ></canvas>
+            <canvas id="bar-chart_2" ></canvas>
         </div>
     </div>
     <!-- /.card-body -->
 </div>
 
+<div class="row">
+    <section class="col-lg-6 connectedSortable">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+            차트 샘플
+        </h3>
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#Daily-chart" data-toggle="tab">Daily</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Weekly-chart" data-toggle="tab">Weekly</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Monthly-chart" data-toggle="tab">Monthly</a>
+            </li>
+          </ul>
+        </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
+        <div class="tab-content p-0">
+          <div class="chart tab-pane active" id="Daily-chart" style="position: relative; height: 300px;">
+              <canvas id="bar-chart2" height="300" style="height: 300px;"></canvas>
+           </div>
+          <div class="chart tab-pane" id="Weekly-chart" style="position: relative; height: 300px;">
+            <canvas id="bar-chart" height="300" style="height: 300px;"></canvas>
+          </div>
+          <div class="chart tab-pane" id="Monthly-chart" style="position: relative; height: 300px;">
+            <canvas id="bar-chart3" height="300" style="height: 300px;"></canvas>
+          </div>
+        </div>
+      </div><!-- /.card-body -->
+    </div>
+    </section>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
