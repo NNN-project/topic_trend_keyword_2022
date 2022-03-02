@@ -16,7 +16,7 @@
 ## Usage
 1. Project download
 2. 명령프롬프트(CMD) 열기
-3. 가상환경 생성 및 접속
+3. 가상환경 생성 및 접속   
 ex) https://wikidocs.net/70588
 5. Dependencies 설치
 ```
