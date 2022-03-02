@@ -6,17 +6,21 @@ from django.db import connection
 from datetime import datetime, timedelta
 
 
-# Create your views here.
-
-
 # 인덱스 페이지 실행 함수 ------->
 def index(request):
     import datetime
     today = datetime.date.today()
+
+    # 하루 전 날짜
     last_day = today - datetime.timedelta(1)
-    last_monday = today - datetime.timedelta(days=today.weekday())  # 지난 월요일 날짜
-    last_firstday = today.replace(day=1)  # 지난 월요일 날짜
+    # 이번주 월요일 날짜
+    last_monday = today - datetime.timedelta(days=today.weekday())
+    # 이번달 1일 날짜
+    last_firstday = today.replace(day=1)
+
+    # 이번주 월요일 부터 어제 까지
     p_week = str(last_monday) + " ~ " + str(last_day)
+    # 이번달 1일 부터 어제 까지
     p_month = str(last_firstday) + " ~ " + str(last_day)
 
     current_url = r'../'
@@ -30,33 +34,8 @@ def index(request):
     return render(request, 'tkt/index.html', context)
 
 
-def data_period_day(request):
-    import datetime
-    today = datetime.date.today()
-    last_day = today - datetime.timedelta(1)
-    last_monday = today - datetime.timedelta(days=today.weekday())  # 지난 월요일 날짜
-    last_firstday = today.replace(day=1)  # 지난 월요일 날짜
-    print(today, last_day, last_monday, last_firstday)
-
-    p_week = str(last_monday) + " ~ " + str(last_day)
-    p_month = str(last_firstday) + " ~ " + str(last_day)
-    print(p_week)
-    print(p_month)
-
-    dic_data = {
-        'p_day': last_day,
-        'p_week': p_week,
-        'p_month': p_month
-    }
-
-    return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
-
-
+# 데이터 수집 후 json 반환, 일간 키워드 탑10 ------->
 def data_keyword_top10_day(request):
-    # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
-    labels = []
-    data = []
-
     try:
         cursor = connection.cursor()
         cursor.execute("SELECT keyword, weight FROM keyword WHERE c_date = curdate() ORDER BY weight DESC LIMIT 10;")
@@ -72,6 +51,9 @@ def data_keyword_top10_day(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
+    labels = []
+    data = []
+
     for entry in result:
         labels.append(entry[0])
         data.append(entry[1])
@@ -84,10 +66,8 @@ def data_keyword_top10_day(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 주간 키워드 탑10 ------->
 def data_keyword_top10_week(request):
-    labels = []
-    data = []
-
     try:
         cursor = connection.cursor()
         cursor.execute(
@@ -105,6 +85,9 @@ def data_keyword_top10_week(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
+    labels = []
+    data = []
+
     for entry in result:
         labels.append(entry[0])
         data.append(entry[1])
@@ -117,10 +100,8 @@ def data_keyword_top10_week(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 월간 키워드 탑10 ------->
 def data_keyword_top10_month(request):
-    labels = []
-    data = []
-
     try:
         cursor = connection.cursor()
         cursor.execute(
@@ -138,6 +119,9 @@ def data_keyword_top10_month(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
+    labels = []
+    data = []
+
     for entry in result:
         labels.append(entry[0])
         data.append(entry[1])
@@ -150,9 +134,8 @@ def data_keyword_top10_month(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 일간 트위터 ------->
 def twitter_dy_data(request):
-    today_datetime = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
-    # MySQL 에서 오늘 기준 keyword 테이블에서 weight 기준 상위 10개 키워드 데이터 추출
     try:
         cursor = connection.cursor()
         cursor.execute("SELECT keyword FROM keyword WHERE c_date = date(now()) ORDER BY weight DESC LIMIT 5;")
@@ -204,6 +187,7 @@ def twitter_dy_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 월간 트위터 ------->
 def twitter_wk_data(request):
     try:
         cursor = connection.cursor()
@@ -259,6 +243,7 @@ def twitter_wk_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 월간 트위터 ------->
 def twitter_mt_data(request):
     try:
         cursor = connection.cursor()
@@ -316,6 +301,7 @@ def twitter_mt_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 일간 유튜브 ------->
 def youtube_dy_data(request):
     try:
         cursor = connection.cursor()
@@ -368,6 +354,7 @@ def youtube_dy_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 주간 유튜브 ------->
 def youtube_wk_data(request):
     try:
         cursor = connection.cursor()
@@ -425,6 +412,7 @@ def youtube_wk_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 월간 유튜브 ------->
 def youtube_mt_data(request):
     try:
         cursor = connection.cursor()
@@ -485,6 +473,7 @@ def youtube_mt_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 키워드 일별 변화량 ------->
 def data_daily_chart(request):
     try:
         cursor = connection.cursor()
@@ -531,6 +520,7 @@ def data_daily_chart(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 키워드 주별 변화량 ------->
 def stacked_wk_data(request):
     from datetime import datetime
     date = datetime.today().strftime("%Y-%m-%d")
@@ -598,6 +588,7 @@ def stacked_wk_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
+# 데이터 수집 후 json 반환, 키워드 월간 변화량 ------->
 def stacked_mt_data(request):
     import calendar
     from datetime import datetime

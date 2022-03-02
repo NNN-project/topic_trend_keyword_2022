@@ -1,9 +1,8 @@
 from django.urls import path
 from tkt import views
 
-
 # 앱 이름 정의
-app_name = 'tkt'
+app_name = 'topic-trend-keyword'
 
 # url 패턴 정의
 urlpatterns = [
@@ -27,6 +26,4 @@ urlpatterns = [
     path('json-stacked-wk-data/', views.stacked_wk_data, name='json-stacked-wk-data'),
     path('json-stacked-mt-data/', views.stacked_mt_data, name='json-stacked-mt-data'),
 
-    # json 기준 날짜 데이터
-    path('json-period-day/', views.data_period_day, name='json-period-day'),
 ]
