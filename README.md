@@ -29,8 +29,7 @@ mysqlclient == 2.1.0
 ```
 python manage.py runserver
 ```
-6. 명령프롬프트에 뜨는 로컬 주소로 접속 가능
-
+6. 명령프롬프트에 뜨는 로컬 주소로 접속 가능   
 localhost:8000 or http://127.0.0.1:8000
 
 ## Demo
