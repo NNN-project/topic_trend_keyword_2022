@@ -1,9 +1,6 @@
-import json
-
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.db import connection
-from datetime import datetime, timedelta
 
 
 # 인덱스 페이지 실행 함수 ------->
@@ -16,12 +13,12 @@ def index(request):
     # 이번주 월요일 날짜
     last_monday = today - datetime.timedelta(days=today.weekday())
     # 이번달 1일 날짜
-    last_firstday = today.replace(day=1)
+    last_first_day = today.replace(day=1)
 
     # 이번주 월요일 부터 어제 까지
     p_week = str(last_monday) + " ~ " + str(last_day)
     # 이번달 1일 부터 어제 까지
-    p_month = str(last_firstday) + " ~ " + str(last_day)
+    p_month = str(last_first_day) + " ~ " + str(last_day)
 
     current_url = r'../'
     context = {
@@ -38,6 +35,7 @@ def index(request):
 def data_keyword_top10_day(request):
     try:
         cursor = connection.cursor()
+        # 오늘 날짜 기준 키워드 10개 수집
         cursor.execute("SELECT keyword, weight FROM keyword WHERE c_date = curdate() ORDER BY weight DESC LIMIT 10;")
         result = cursor.fetchall()
         # 오늘에 대한 정보 없을 시 어제 날짜로 출력
@@ -70,6 +68,7 @@ def data_keyword_top10_day(request):
 def data_keyword_top10_week(request):
     try:
         cursor = connection.cursor()
+        #DB keyword테이블에서 이번주 기준 keyword별 언급량 합계 상위 10개의 keyword 추출
         cursor.execute(
             "SELECT keyword, CAST(SUM(weight) AS SIGNED) FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 10;")
         result = cursor.fetchall()
@@ -88,6 +87,7 @@ def data_keyword_top10_week(request):
     labels = []
     data = []
 
+    # 각 리스트에 keyword와 weight 담기
     for entry in result:
         labels.append(entry[0])
         data.append(entry[1])
@@ -104,6 +104,7 @@ def data_keyword_top10_week(request):
 def data_keyword_top10_month(request):
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 이번달 keyword별 언급량 합계 상위 10개의 keyword 추출
         cursor.execute(
             "SELECT keyword, CAST(SUM(weight) AS SIGNED) FROM keyword WHERE date_format(c_date, '%Y-%m') = date_format(curdate(), '%Y-%m') GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 10;")
         result = cursor.fetchall()
@@ -122,6 +123,7 @@ def data_keyword_top10_month(request):
     labels = []
     data = []
 
+    # 각 리스트에 keyword와 weight 담기
     for entry in result:
         labels.append(entry[0])
         data.append(entry[1])
@@ -138,9 +140,11 @@ def data_keyword_top10_month(request):
 def twitter_dy_data(request):
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 오늘 기준 키워드 카운트 순 상위 5개의 keyword 추출
         cursor.execute("SELECT keyword FROM keyword WHERE c_date = date(now()) ORDER BY weight DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
+            # DB twitter테이블에서 추출한 keywords의 키워드, 리트윗 수, 좋아요 수, 해시태그 추출
             cursor.execute(
                 "SELECT keyword_id, CAST(SUM(retweet) AS SIGNED), CAST(SUM(like_count) AS SIGNED), group_concat(DISTINCT(nullif(tags, 'empty'))) FROM twitter WHERE SUBSTR(keyword_id, 1, 8) = date(now()) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             twitter = cursor.fetchall()
@@ -191,14 +195,17 @@ def twitter_dy_data(request):
 def twitter_wk_data(request):
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 이번주 keyword별 언급량 합계 상위 5개의 keyword 추출
         cursor.execute(
             "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
+            # DB twitter테이블에서 추출한 keywords의 키워드, 리트윗 수, 좋아요 수, 해시태그 모두 추출
             cursor.execute(
                 "SELECT keyword_id, CAST(SUM(retweet) AS SIGNED), CAST(SUM(like_count) AS SIGNED), group_concat(DISTINCT(nullif(tags, 'empty'))) FROM twitter WHERE SUBSTR(keyword_id, 1, 8) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND SUBSTR(keyword_id, 1, 8) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             twitter = cursor.fetchall()
         else:
+            # 이번주 정보 없을 시 지난주 정보출력
             cursor.execute(
                 "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND DATE(c_date) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
             keywords = list(cursor.fetchall())
@@ -247,10 +254,12 @@ def twitter_wk_data(request):
 def twitter_mt_data(request):
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 이번달 keyword별 언급량 합계 상위 5개의 keyword 추출
         cursor.execute(
             "SELECT keyword FROM keyword WHERE DATE(c_date) >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND DATE(c_date) <= LAST_DAY(NOW()) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
+            # DB twitter테이블에서 추출한 keywords의 키워드, 리트윗 수, 좋아요 수, 해시태그 모두 추출
             cursor.execute(
                 "SELECT keyword_id, CAST(SUM(retweet) AS SIGNED), CAST(SUM(like_count) AS SIGNED), group_concat(DISTINCT(nullif(tags, 'empty'))) FROM twitter WHERE SUBSTR(keyword_id, 1, 8) >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND SUBSTR(keyword_id, 1, 8) <= LAST_DAY(NOW()) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             twitter = cursor.fetchall()
@@ -269,6 +278,7 @@ def twitter_mt_data(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
+    # twitter 테이블 에서 추출한 정보 keyword 별로 합치기
     monthly_twitter = {}
     for i in keywords:
         monthly_twitter[i[0]] = [0, 0, '']
@@ -305,9 +315,11 @@ def twitter_mt_data(request):
 def youtube_dy_data(request):
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 오늘 기준 키워드 카운트 순 상위 5개의 keyword 추출
         cursor.execute("SELECT keyword FROM keyword WHERE c_date = date(now()) ORDER BY weight DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
+            # DB youtube테이블에서 추출한 keywords의 키워드, 조회수, 좋아요 수, 댓글 수, 해시태그 모두 추출
             cursor.execute(
                 "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) = curdate() GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             youtube = cursor.fetchall()
@@ -358,10 +370,12 @@ def youtube_dy_data(request):
 def youtube_wk_data(request):
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 이번주 keyword별 언급량 합계 상위 5개의 keyword 추출
         cursor.execute(
             "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
         keywords = list(cursor.fetchall())
         if len(keywords) != 0:
+            # DB youtube테이블에서 추출한 keywords의 키워드, 조회수, 좋아요 수, 댓글 수, 해시태그 모두 추출
             cursor.execute(
                 "SELECT keyword_id, CAST(SUM(view_count) AS SIGNED), CAST(SUM(like_count) AS SIGNED), CAST(SUM(comment_count) AS SIGNED), group_concat(tags) FROM youtube WHERE SUBSTR(keyword_id, 1, 8) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND SUBSTR(keyword_id, 1, 8) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword_id ORDER BY COUNT(keyword_id) DESC;")
             youtube = cursor.fetchall()
@@ -380,6 +394,7 @@ def youtube_wk_data(request):
         connection.rollback()
         print("Failed Selecting in StockList")
 
+    # youtube테이블에서 추출한 정보 keyword별로 합치기
     weekly_youtube = {}
     for i in keywords:
         weekly_youtube[i[0]] = [0, 0, 0, '']
@@ -601,30 +616,40 @@ def stacked_mt_data(request):
 
     try:
         cursor = connection.cursor()
+        # DB keyword테이블에서 이번주 keyword별 언급량 합계 상위 5개의 keyword 추출
         cursor.execute(
-            "SELECT keyword FROM keyword WHERE DATE(c_date) >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND DATE(c_date) <= LAST_DAY(NOW()) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+            "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
         keywords = cursor.fetchall()
-        if len(keywords) != 0:
-            for i in range(5):
-                cursor.execute(
-                    f"SELECT weight FROM keyword WHERE DATE(c_date) >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND DATE(c_date) <= LAST_DAY(NOW()) AND keyword = '{keywords[i][0]}' ORDER BY c_date;")
-                daily_weight = list(cursor.fetchall())
-                weight = [0] * last_day
-                for n in range(len(daily_weight)):
-                    weight[n] = daily_weight[0][0]
-                    monthly_chart[keywords[i][0]] = weight
-        else:
+        # 이번달(1일~말일) 날짜 추출
+        cursor.execute(
+            "WITH RECURSIVE day AS (SELECT DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AS DAY UNION ALL SELECT DATE_ADD(DAY, INTERVAL 1 DAY) FROM day WHERE DAY < LAST_DAY(NOW()))SELECT date_format(DAY, '%Y-%m-%d') FROM day")
+        day = cursor.fetchall()
+
+        if len(keywords) == 0:
+            # 이번주 데이터가 없을 시 지난달 데이터 추출
+            # DB keyword테이블에서 지난달 keyword별 언급량 합계 상위 5개의 keyword 추출
             cursor.execute(
-                "SELECT keyword FROM keyword WHERE date_format(c_date, '%Y-%m') = date_format((curdate() - INTERVAL 1 MONTH), '%Y-%m') GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+                "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND DATE(c_date) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
             keywords = cursor.fetchall()
-            for i in range(5):
-                cursor.execute(
-                    f"SELECT weight FROM keyword WHERE date_format(c_date, '%Y-%m') = date_format((curdate() - INTERVAL 1 MONTH), '%Y-%m') AND keyword = '{keywords[i][0]}' ORDER BY c_date;")
-                daily_weight = list(cursor.fetchall())
-                weight = [0] * last_day
-                for n in range(len(daily_weight)):
-                    weight[n] = daily_weight[0][0]
-                    monthly_chart[keywords[i][0]] = weight
+            # 지난달(1일~말일) 날짜 추출
+            cursor.execute(
+                "WITH RECURSIVE day AS (SELECT DATE_SUB((curdate() - INTERVAL 1 MONTH), INTERVAL (DAY(curdate())-1) DAY) AS DAY UNION ALL SELECT DATE_ADD(DAY, INTERVAL 1 DAY) FROM day WHERE DAY < LAST_DAY((curdate() - INTERVAL 1 MONTH)))SELECT date_format(DAY, '%Y-%m-%d') FROM day;")
+            day = cursor.fetchall()
+
+        # DB keyword테이블에서 추출한 keywords의 일별 weight 추출
+        for i in range(5):
+            weight = [0] * int(day[-1][0][-2:])
+            for d in day:
+                if d[0] == date:
+                    break
+                else:
+                    # 일별 추출한 keywords의 weight 추출
+                    cursor.execute(
+                        f"SELECT weight FROM keyword WHERE DATE(c_date) = '{d[0]}' AND keyword = '{keywords[i][0]}'")
+                    daily_weight = list(cursor.fetchall())
+                    if daily_weight != []:
+                        weight[int(d[0][-2:]) - 1] = daily_weight[0][0]
+            monthly_chart[keywords[i][0]] = weight
         connection.commit()
         connection.close()
     except:

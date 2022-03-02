@@ -14,6 +14,7 @@
             <hr class="hr" style="margin-top: 3rem;">
         </div>
         <!-- 타이틀 끝 -->
+        <!-- 메인 데이터 -->
         <div class="container-fluid" style="width: 90%;">
             <!-- Top 10 Topic Keywords -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 5rem;">
@@ -568,7 +569,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="cardcard-outline  card-danger">
+                                        <div class="card card-outline  card-danger">
                                             <div class="card-header">
                                                 <h3 class="card-title">YouTube like</h3>
                                                 <div class="card-tools">
@@ -639,6 +640,7 @@
             </div>
             <!-- TTopic Keywords Trend on Social Media end-->
         </div>
+        <!-- 메인 데이터 끝-->
     </div>
 </main>
 <!-- Page specific script -->
@@ -649,7 +651,7 @@
         dataType: "json",
         success: function (data) {
             var keyword_top10 = "";
-            var color = ['primary', 'success','info','warning', 'Danger'];
+            var color = ['primary','success','info','warning', 'Danger'];
             var pick_color = "";
             for (var i = 0; i < data.data.length; i++) {
                 if (i < 5) {
