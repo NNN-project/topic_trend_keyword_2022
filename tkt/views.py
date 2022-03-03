@@ -229,7 +229,8 @@ def twitter_wk_data(request):
             if word[0] in tweet[0]:
                 weekly_twitter[word[0]][0] += tweet[1]
                 weekly_twitter[word[0]][1] += tweet[2]
-                weekly_twitter[word[0]][2] += tweet[3]
+                if tweet[3] != None:  # 해시태그가 존재 할 경우 추가
+                    weekly_twitter[word[0]][2] += tweet[3]
         no += 1
 
     labels = []
@@ -290,7 +291,8 @@ def twitter_mt_data(request):
             if word[0] in tweet[0]:
                 monthly_twitter[word[0]][0] += tweet[1]
                 monthly_twitter[word[0]][1] += tweet[2]
-                monthly_twitter[word[0]][2] += tweet[3]
+                if tweet[3] != None:  # 해시태그가 존재 할 경우 추가
+                    monthly_twitter[word[0]][2] += tweet[3]
         no += 1
 
     labels = []
@@ -406,7 +408,8 @@ def youtube_wk_data(request):
                 weekly_youtube[word[0]][0] += data[1]
                 weekly_youtube[word[0]][1] += data[2]
                 weekly_youtube[word[0]][2] += data[3]
-                weekly_youtube[word[0]][3] += data[4]
+                if data[4] != None:  # 해시태그가 존재 할 경우 추가
+                    weekly_youtube[word[0]][3] += data[4]
         no += 1
 
     labels = []
@@ -467,7 +470,8 @@ def youtube_mt_data(request):
                 monthly_youtube[word[0]][0] += data[1]
                 monthly_youtube[word[0]][1] += data[2]
                 monthly_youtube[word[0]][2] += data[3]
-                monthly_youtube[word[0]][3] += data[4]
+                if data[4] != None:  # 해시태그가 존재 할 경우 추가
+                    monthly_youtube[word[0]][3] += data[4]
         no += 1
 
     labels = []
