@@ -46,4 +46,4 @@ NNN Lab. 은 AI를 공부하다 만난 사람들이 업무가 아닌 취미로 �
 
 사람들: 최우진, 이재은, 김찬
 
-##### **Topic Keyword Trend Analytics by NNN lab.**
+##### Topic Keyword Trend Analytics by NNN lab.
