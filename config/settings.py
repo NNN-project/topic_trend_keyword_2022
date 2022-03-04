@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!tkt
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.23', 'chank.iptime.org', '127.0.0.1', 'localhost', '192.168.0.35']
+ALLOWED_HOSTS = ['192.168.0.23', 'chank.iptime.org', '127.0.0.1', 'localhost', '192.168.0.35', 'ec2-3-34-141-149.ap-northeast-2.compute.amazonaws.com']
 
 
 # Application definition
