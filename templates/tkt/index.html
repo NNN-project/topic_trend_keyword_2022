@@ -650,7 +650,7 @@
 <script>
     <!-- 키워드 top10 #일간 -->
     $.ajax({
-        url: '../tkt/json-keyword-top10-day/',
+        url: '../json-keyword-top10-day/',
         dataType: "json",
         success: function (data) {
             var keyword_top10 = "";
@@ -676,7 +676,7 @@
 
     <!-- 키워드 top10 #주간 -->
     $.ajax({
-        url: '../tkt/json-keyword-top10-week/',
+        url: '../json-keyword-top10-week/',
         dataType: "json",
         success: function (data) {
             var keyword_top10 = "";
@@ -704,7 +704,7 @@
 
     <!-- 키워드 top10 #월간 -->
     $.ajax({
-        url: '../tkt/json-keyword-top10-month/',
+        url: '../json-keyword-top10-month/',
         dataType: "json",
         success: function (data) {
             var keyword_top10 = "";
@@ -732,7 +732,7 @@
 
     <!-- Daily Topic Keyword Chart -->
     $.ajax({
-        url: '../tkt/json-daily-chart/',
+        url: '../json-daily-chart/',
         dataType: "json",
         success: function (data) {
             var daily_top25 = "";
@@ -767,7 +767,7 @@
 
     <!-- Weekly Bar Chart -->
     $.ajax({
-        url: '../tkt/json-stacked-wk-data/',
+        url: '../json-stacked-wk-data/',
         type: 'get',
         dataType: 'json',
         success: function (data) {
@@ -787,7 +787,7 @@
 
     <!-- Monthly Stacked Bar Chart -->
     $.ajax({
-        url: '../tkt/json-stacked-mt-data/',
+        url: '../json-stacked-mt-data/',
         type: 'get',
         dataType: 'json',
         success: function (data) {
@@ -818,7 +818,7 @@
     <!-- 트위터 테이블 -->
     <!-- 트위터 테이블 일간 -->
     $.ajax({
-        url: '../tkt/json-twitter-dy-data/',
+        url: '../json-twitter-dy-data/',
         dataType: "json",
         success: function (data) {
             var twitter_retweet = "";
@@ -857,7 +857,7 @@
 
     <!-- 트위터 테이블 주간 -->
     $.ajax({
-        url: '../tkt/json-twitter-wk-data/',
+        url: '../json-twitter-wk-data/',
         dataType: "json",
         success: function (data) {
             var twitter_retweet = "";
@@ -896,7 +896,7 @@
 
     <!-- 트위터 테이블 월간 -->
     $.ajax({
-        url: '../tkt/json-twitter-mt-data/',
+        url: '../json-twitter-mt-data/',
         dataType: "json",
         success: function (data) {
             var twitter_retweet = "";
@@ -936,7 +936,7 @@
     <!-- 유튜브 테이블 -->
     <!-- 유튜브 테이블 일간-->
     $.ajax({
-        url: '../tkt/json-youtube-dy-data/',
+        url: '../json-youtube-dy-data/',
         dataType: "json",
         success: function (data) {
             var youtube_comment = "";
@@ -982,7 +982,7 @@
     });
     <!-- 유튜브 테이블 주간-->
     $.ajax({
-        url: '../tkt/json-youtube-wk-data/',
+        url: '../json-youtube-wk-data/',
         dataType: "json",
         success: function (data) {
             var youtube_comment = "";
@@ -1028,7 +1028,7 @@
     });
     <!-- 유튜브 테이블 월간-->
     $.ajax({
-        url: '../tkt/json-youtube-mt-data/',
+        url: '../json-youtube-mt-data/',
         dataType: "json",
         success: function (data) {
             var youtube_comment = "";
