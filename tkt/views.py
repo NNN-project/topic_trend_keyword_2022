@@ -607,7 +607,9 @@ def stacked_wk_data(request):
     return JsonResponse(dic_data, json_dumps_params={'ensure_ascii': False})
 
 
-# 데이터 수집 후 json 반환, 키워드 월간 변화량 ------->
+
+# 데이터 수집 후 json 반환, 키워드 주별 변화량 ------->
+
 def stacked_mt_data(request):
     import calendar
     from datetime import datetime
@@ -620,9 +622,9 @@ def stacked_mt_data(request):
 
     try:
         cursor = connection.cursor()
-        # DB keyword테이블에서 이번주 keyword별 언급량 합계 상위 5개의 keyword 추출
+        # DB keyword테이블에서 이번달 keyword별 언급량 합계 상위 5개의 keyword 추출
         cursor.execute(
-            "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(curdate(), - WEEKDAY(curdate())) AND DATE(c_date) <= ADDDATE(curdate(), - WEEKDAY(curdate())+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+            "SELECT keyword FROM keyword WHERE DATE(c_date) >= DATE_SUB(curdate(), INTERVAL (DAY(curdate())-1) DAY) AND DATE(c_date) <= LAST_DAY(NOW()) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
         keywords = cursor.fetchall()
         # 이번달(1일~말일) 날짜 추출
         cursor.execute(
@@ -630,15 +632,17 @@ def stacked_mt_data(request):
         day = cursor.fetchall()
 
         if len(keywords) == 0:
-            # 이번주 데이터가 없을 시 지난달 데이터 추출
+            # 이번달 데이터가 없을 시 지난달 데이터 추출
             # DB keyword테이블에서 지난달 keyword별 언급량 합계 상위 5개의 keyword 추출
             cursor.execute(
-                "SELECT keyword FROM keyword WHERE DATE(c_date) >= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))) AND DATE(c_date) <= ADDDATE(date_add(curdate(), interval -1 day), - WEEKDAY(date_add(curdate(), interval -1 day))+ 6) GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+                "SELECT keyword FROM keyword WHERE date_format(c_date, '%Y-%m') = date_format((curdate() - INTERVAL 1 MONTH), '%Y-%m') GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
             keywords = cursor.fetchall()
             # 지난달(1일~말일) 날짜 추출
             cursor.execute(
                 "WITH RECURSIVE day AS (SELECT DATE_SUB((curdate() - INTERVAL 1 MONTH), INTERVAL (DAY(curdate())-1) DAY) AS DAY UNION ALL SELECT DATE_ADD(DAY, INTERVAL 1 DAY) FROM day WHERE DAY < LAST_DAY((curdate() - INTERVAL 1 MONTH)))SELECT date_format(DAY, '%Y-%m-%d') FROM day;")
             day = cursor.fetchall()
+
+        monthly_chart = {}
 
         # DB keyword테이블에서 추출한 keywords의 일별 weight 추출
         for i in range(5):
