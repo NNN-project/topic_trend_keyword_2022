@@ -557,17 +557,18 @@ def stacked_wk_data(request):
             "WITH RECURSIVE day AS (SELECT ADDDATE(curdate(), - WEEKDAY(curdate())) AS DAY UNION ALL SELECT DATE_ADD(DAY, INTERVAL 1 DAY) FROM day WHERE DAY < ADDDATE(curdate(), - WEEKDAY(curdate())+ 6)) SELECT date_format(DAY, '%Y-%m-%d') FROM day;")
         day = cursor.fetchall()
 
-        # 이번주 데이터가 없을 시 지난주 데이터 추출
         if len(keywords) == 0:
+            # 이번주 데이터가 없을 시 지난주 데이터 추출
             # DB keyword테이블에서 지난주 keyword별 언급량 합계 상위 5개의 keyword 추출
             cursor.execute(
-                "SELECT keyword FROM keyword WHERE DATE(c_date) >= date_format(curdate() - INTERVAL 1 WEEK - WEEKDAY(curdate()), '%Y-%m-%d') AND DATE(c_date) <= date_format(curdate() - INTERVAL 1 WEEK + (6 - WEEKDAY(curdate())), '%Y-%m-%d') GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
+                "SELECT keyword FROM keyword WHERE DATE(c_date) >= DATE_FORMAT(DATE_SUB(curdate(), INTERVAL (WEEKDAY(curdate()) + 7) DAY), '%Y-%m-%d') AND DATE(c_date) <= DATE_FORMAT(DATE_SUB(curdate(), INTERVAL (WEEKDAY(curdate())+1) DAY), '%Y-%m-%d') GROUP BY keyword ORDER BY SUM(weight) DESC LIMIT 5;")
             keywords = cursor.fetchall()
             # 지난주(월~일) 날짜 추출
             cursor.execute(
-                "WITH RECURSIVE day AS (SELECT DATE(curdate() - INTERVAL 1 WEEK - WEEKDAY(curdate())) AS DAY UNION ALL SELECT DATE_ADD(DAY, INTERVAL 1 DAY) FROM day WHERE DAY < DATE(curdate() - INTERVAL 1 WEEK + (6 - WEEKDAY(curdate())))) SELECT date_format(DAY, '%Y-%m-%d') FROM day;")
+                "WITH RECURSIVE day AS (SELECT DATE_FORMAT(DATE_SUB(curdate(), INTERVAL (WEEKDAY(curdate()) + 7) DAY), '%Y-%m-%d') AS DAY UNION ALL SELECT DATE_ADD(DAY, INTERVAL 1 DAY) FROM day WHERE DAY < DATE_FORMAT(DATE_SUB(curdate(), INTERVAL (WEEKDAY(curdate())+1) DAY), '%Y-%m-%d')) SELECT date_format(DAY, '%Y-%m-%d') FROM day;")
             day = cursor.fetchall()
 
+        weekly_chart = {}
         # DB keyword테이블에서 추출한 keywords의 일별 weight 추출
         for i in range(5):
             weight = [0] * 7
@@ -576,7 +577,6 @@ def stacked_wk_data(request):
                 if d[0] == date:
                     break
                 else:
-                    # 일별 추출한 keywords의 weight 추출
                     cursor.execute(
                         f"SELECT weight FROM keyword WHERE DATE(c_date) = '{d[0]}' AND keyword = '{keywords[i][0]}'")
                     daily_weight = list(cursor.fetchall())
