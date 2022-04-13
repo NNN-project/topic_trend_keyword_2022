@@ -4,7 +4,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'topic_keywords_db',
         'USER': 'admin',
-        'PASSWORD': 'tkt202202',
+        'PASSWORD': '******',
         'HOST': 'tkt-db-ko.cnirlhwrm55r.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
     }
